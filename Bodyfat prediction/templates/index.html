@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyFat Prediction</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="">
+<header class="bg-blue-900 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <h1 class="text-2xl font-bold">BodyFat Prediction</h1>
+    <ul class="flex space-x-4 text-xl font-semibold">
+      <li class="text-white"><a href="#home">Home</a></li>
+      <li class="text-white"><a href="#prediction">Prediction</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home">
+    <div class="container mx-auto my-8 px-4">
+  <div class="flex flex-col md:flex-row justify-between space-x-16">
+    <div class="bg-white p-4 my-16 w-96">
+      <h2 class="text-3xl font-bold mb-8">Welcome to Our Website</h2>
+    <p class="text-2xl text-gray-600 mb-4">Use our platform to know your bodyfat percentage to track your health.</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow-sm">
+       <img src="{{ url_for('static', filename='image/img.png') }}" alt="">
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="bg-gray-100 p-16" id="prediction">
+    <div class="w-[400px] p-6 bg-white rounded-md shadow-lg">
+        <h1 class="text-center text-blue-800 text-2xl font-bold">BodyFat Prediction</h1>
+    <form id="prediction-form"  class="grid grid-cols-3 gap-4">
+        <div>
+            <label for="Density" class="block font-semibold">Density:</label>
+            <input type="number" id="Density" name="Density" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Age" class="block font-semibold">Age:</label>
+            <input type="text" id="Age" name="Age" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Weight" class="block font-semibold">Weight:</label>
+            <input type="number" id="Weight" name="Weight" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Height" class="block font-semibold">Height:</label>
+            <input type="number" id="Height" name="Height" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Neck" class="block font-semibold">Neck:</label>
+            <input type="number" id="Neck" name="Neck" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Chest" class="block font-semibold">Chest:</label>
+            <input type="number" id="Chest" name="Chest" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Abdomen" class="block font-semibold">Abdomen:</label>
+            <input type="number" id="Abdomen" name="Abdomen" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Hip" class="block font-semibold">Hip:</label>
+            <input type="number" id="Hip" name="Hip" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Thigh" class="block font-semibold">Thigh:</label>
+            <input type="number" id="Thigh" name="Thigh" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Knee" class="block font-semibold">Knee:</label>
+            <input type="number" id="Knee" name="Knee" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Ankle" class="block font-semibold">Ankle:</label>
+            <input type="number" id="Ankle" name="Ankle" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Biceps" class="block font-semibold">Biceps:</label>
+            <input type="number" id="Biceps" name="Biceps" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Forearm" class="block font-semibold">Forearm:</label>
+            <input type="number" id="Forearm" name="Forearm" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <label for="Wrist" class="block font-semibold">Wrist:</label>
+            <input type="number" id="Wrist" name="Wrist" class="w-full border rounded-md px-3 py-2" step="any" required>
+        </div>
+        <div>
+            <button type="submit" class="w-full bg-blue-800 text-white font-bold hover:bg-blue-900 py-2 px-4 rounded-md">Predict</button>
+        </div>
+    </form>
+    <div id="result" class="mt-4 text-2xl font-bold"></div>
+</div>
+</section>
+<footer id="contact" class="bg-blue-900 text-white py-4">
+  <div class="container mx-auto text-center">
+    <p>&copy; 2024 BodyFat Prediction</p>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#prediction-form').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/predict',
+                data: $('#prediction-form').serialize(),
+                success: function(response) {
+                    $('#result').text('Predicted Body Fat: ' + response.prediction.toFixed(2));
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>
