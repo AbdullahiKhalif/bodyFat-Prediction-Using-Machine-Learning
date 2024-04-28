@@ -6,15 +6,28 @@
     <title>BodyFat Prediction</title>
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="">
 <header class="bg-blue-900 text-white py-4">
   <div class="container mx-auto flex justify-between items-center px-4">
     <h1 class="text-2xl font-bold">BodyFat Prediction</h1>
     <ul class="flex space-x-4 text-xl font-semibold">
-      <li class="text-white"><a href="#home">Home</a></li>
-      <li class="text-white"><a href="#prediction">Prediction</a></li>
-    </ul>
+    <li class="text-white"><a href="#home">Home</a></li>
+    <li class="text-white"><a href="#about">About Us</a></li>
+    <li class="text-white"><a href="#prediction">Prediction</a></li>
+    <li class="text-white"><a href="#ourTeam">Our Team</a></li>
+
+</ul>
+
+      <ul class="flex space-x-4">
+           {% if 'username' in session %}
+        <li class="text-slat-600">Welcome {{ session['username'] }}!</li>
+        <li class="text-white"><a href="{{ url_for('logout') }}"><i class="fa fa-power-off"></i></a></li>
+    {% else %}
+        <li class="text-white"><a href="{{ url_for('login') }}">Login</a></li>
+    {% endif %}
+      </ul>
   </div>
 </header>
 
@@ -32,6 +45,17 @@
 </div>
 </section>
 
+<section id="about" class="bg-white py-16">
+  <div class="container mx-auto px-4">
+      <div class="w-[400px] p-6">
+    <h2 class="text-3xl font-bold mb-8 text-center text-blue-600">About Us</h2>
+    <p class="text-lg text-gray-700">BodyFat Prediction is an innovative platform designed to help individuals track their body fat percentage effectively. <b class="text-blue-700">Our mission is</b> to provide accurate predictions and valuable insights into body composition, empowering users to make informed decisions about their health and fitness goals.</p>
+    <p class="text-lg text-gray-700">Developed by a team of experts in machine learning and fitness, BodyFat Prediction utilizes state-of-the-art algorithms to analyze various physical measurements and provide personalized predictions. Whether you're an athlete striving for peak performance or someone on a journey to improve overall health, our platform is here to support you every step of the way.</p>
+    <p class="text-lg text-gray-700">At BodyFat Prediction, we prioritize user privacy and data security. Your personal information is kept confidential and encrypted, ensuring a safe and secure user experience. With user-friendly interfaces and seamless integration, our platform makes it easy for anyone to access valuable insights into their body composition.</p>
+  </div>
+      </div>
+</section>
+
 <section class="bg-gray-100 p-16" id="prediction">
     <div class="w-[400px] p-6 bg-white rounded-md shadow-lg">
         <h1 class="text-center text-blue-800 text-2xl font-bold">BodyFat Prediction</h1>
@@ -42,7 +66,7 @@
         </div>
         <div>
             <label for="Age" class="block font-semibold">Age:</label>
-            <input type="text" id="Age" name="Age" class="w-full border rounded-md px-3 py-2" step="any" required>
+            <input type="number" id="Age" name="Age" class="w-full border rounded-md px-3 py-2" step="any" required>
         </div>
         <div>
             <label for="Weight" class="block font-semibold">Weight:</label>
@@ -99,6 +123,60 @@
     <div id="result" class="mt-4 text-2xl font-bold"></div>
 </div>
 </section>
+
+<section id="ourTeam" class="bg-gray-100 py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center text-blue-700">Our Team</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Team Member 1 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <img src="{{ url_for('static', filename='image/noImage.jpg') }}" alt="Team Member 1" class="w-full rounded-full mb-4" style="height:220px; object-fit: cover;">
+        <h3 class="text-xl font-semibold mb-2">Da'ud Ibrahim</h3>
+        <div class="flex items-center space-x-2 mb-4">
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+        </div>
+
+      </div>
+
+      <!-- Team Member 2 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <img src="{{ url_for('static', filename='image/noImage.jpg') }}" alt="Team Member 2" class="w-full rounded-full mb-4" style="height:220px; object-fit: cover;">
+        <h3 class="text-xl font-semibold mb-2">Ayanle Dalal Maow</h3>
+        <div class="flex items-center space-x-2 mb-4">
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- Team Member 3 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <img src="{{ url_for('static', filename='image/noImage.jpg') }}" alt="Team Member 3" class="w-full rounded-full mb-4" style="height:220px; object-fit: cover;">
+        <h3 class="text-xl font-semibold mb-2">Abdullahi A. Hussein</h3>
+        <div class="flex items-center space-x-2 mb-4">
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+        </div>
+
+      </div>
+
+      <!-- Team Member 4 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <img src="{{ url_for('static', filename='image/noImage.jpg') }}" alt="Team Member 4" class="w-full rounded-full mb-4" style="height:220px; object-fit: cover;">
+        <h3 class="text-xl font-semibold mb-2">Omar Abdi</h3>
+        <div class="flex items-center space-x-2 mb-4">
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+        </div>
+        </div>
+    </div>
+  </div>
+</section>
+
 <footer id="contact" class="bg-blue-900 text-white py-4">
   <div class="container mx-auto text-center">
     <p>&copy; 2024 BodyFat Prediction</p>
@@ -115,6 +193,7 @@
                 data: $('#prediction-form').serialize(),
                 success: function(response) {
                     $('#result').text('Predicted Body Fat: ' + response.prediction.toFixed(2));
+                    $('#prediction-form')[0].reset();
                 }
             });
         });
